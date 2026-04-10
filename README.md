@@ -1,8 +1,21 @@
 # Portfolio Website
 
-Personal website built with Next.js and configured for GitHub Pages deployment.
+Personal website built with Next.js, with an AI career assistant powered by OpenRouter.
 
 ## Local development
+
+Add your key in one of these files:
+
+- `website/.env.local`
+- workspace root `.env`
+
+Required variable:
+
+```bash
+OPENROUTER_API_KEY=your_key_here
+```
+
+Run locally:
 
 ```bash
 npm install
@@ -11,30 +24,33 @@ npm run dev
 
 Open `http://127.0.0.1:3000`.
 
-## GitHub Pages
+## AI career chat
 
-This repository is configured to deploy from GitHub Actions to GitHub Pages.
+The site includes a server-side API route at:
 
-Site URL after deployment:
+`/api/career-chat`
 
-```text
-https://quanggd192.github.io/portfolio/
-```
+It uses:
 
-Required GitHub setting:
+- OpenRouter endpoint: `https://openrouter.ai/api/v1/chat/completions`
+- Model: `openai/gpt-5.4`
 
-1. Open the repository on GitHub.
-2. Go to `Settings` -> `Pages`.
-3. Set `Source` to `GitHub Actions`.
+The API key stays on the server and is never exposed to the browser.
 
-After that, every push to `main` will trigger deployment through:
+## Deployment
 
-`/.github/workflows/deploy-pages.yml`
+This version is no longer compatible with GitHub Pages static hosting, because
+the AI chat requires a secure server runtime to call OpenRouter.
+
+Use a platform that supports Next.js server routes, such as:
+
+- Vercel
+- Render
+- Railway
+- Fly.io
 
 ## Production build
 
 ```bash
 npm run build
 ```
-
-The static export is generated in `out/`.
